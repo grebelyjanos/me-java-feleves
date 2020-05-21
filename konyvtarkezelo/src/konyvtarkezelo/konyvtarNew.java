@@ -52,7 +52,7 @@ public class konyvtarNew extends JDialog {
 							if(checker.testingDate(releasedate, "Megjelenés éve"))
 								if(checker.filled(status, "Státusz")) {
 									dbmethods.DBConnect();
-									dbmethods.DBInstertData(RTF(isbn), RTF(title), RTF(author), RTF(releasedate), RTF(status));
+									dbmethods.DBInstertData(ReadTextField(isbn), ReadTextField(title), ReadTextField(author), ReadTextField(releasedate), ReadTextField(status));
 									dbmethods.DBDisconnect();
 								}
 				
@@ -109,7 +109,7 @@ public class konyvtarNew extends JDialog {
 
 	}
 	
-	public String RTF(JTextField gettext) {
+	public String ReadTextField(JTextField gettext) {
 		return gettext.getText();
 	}
 }

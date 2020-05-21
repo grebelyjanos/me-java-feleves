@@ -37,9 +37,9 @@ public class konyvtarDel extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public konyvtarDel(JFrame f, konyvtarTable bktm) {
-		super(f, "Könyv törlése", true);
-		konyvtartm=bktm;
+	public konyvtarDel(JFrame var_frame, konyvtarTable var_table) {
+		super(var_frame, "Könyv törlése", true);
+		konyvtartm=var_table;
 		
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
@@ -77,11 +77,11 @@ public class konyvtarDel extends JDialog {
 		JButton btnDelete = new JButton("Adatsor t\u00F6rl\u00E9se");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int count=0, chk=0, x=0;
+				int count=0, chacked=0, x=0;
 				for(x=0; x<konyvtartm.getRowCount();x++)
 					if((Boolean)konyvtartm.getValueAt(x, 0)) {
 						count++;
-						chk=x;
+						chacked=x;
 					}
 				if(count==0) {
 					checker.SendMessage("Nincs kijelölve törlendõ rekord",0);
@@ -91,14 +91,14 @@ public class konyvtarDel extends JDialog {
 				}
 				if(count==1) {
 					/*
-					konyvtartm.removeRow(chk);
+					konyvtartm.removeRow(chacked);
 					checker.SendMessage("A rekord törölve", 1);
 					*/
-					String isbn=konyvtartm.getValueAt(chk, 1).toString();
+					String isbn=konyvtartm.getValueAt(chacked, 1).toString();
 					dbmethods.DBConnect();
 					dbmethods.DeleteData(isbn);
 					dbmethods.DBDisconnect();
-					konyvtartm.removeRow(chk);
+					konyvtartm.removeRow(chacked);
 					checker.SendMessage("A rekord törölve", 1);
 				}
 						

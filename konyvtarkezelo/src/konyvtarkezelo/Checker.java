@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 public class Checker {
 
 	public boolean filled(JTextField text, String textname) {
-		String stext = RTF(text);
+		String stext = ReadTextField(text);
 		if(stext.length()>0) {
 			return true;
 		}else {
@@ -20,7 +20,7 @@ public class Checker {
 	}
 	
 	public boolean testInt(JTextField text, String textname) {
-		String stext=RTF(text);
+		String stext=ReadTextField(text);
 		boolean bool = filled(text,textname);
 		if(bool) try {
 			Integer.parseInt(stext);
@@ -31,7 +31,7 @@ public class Checker {
 		return bool;
 	}
 	
-	public String RTF(JTextField jtext) {
+	public String ReadTextField(JTextField jtext) {
 		return jtext.getText();
 	}
 	
@@ -54,7 +54,7 @@ public class Checker {
 	}
 	
 	public boolean testingDate(JTextField text, String textname) {
-		String stext=RTF(text);
+		String stext=ReadTextField(text);
 		boolean bool = filled(text,textname);
 		if(bool && DateFormatChecker(stext)) {
 			return true;

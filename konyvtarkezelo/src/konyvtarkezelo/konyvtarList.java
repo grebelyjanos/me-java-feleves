@@ -35,9 +35,9 @@ public class konyvtarList extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public konyvtarList(JFrame f, konyvtarTable bktm) {
-		super(f, "Könyvtár lista", true);
-		konyvtartm=bktm;
+	public konyvtarList(JFrame varframe, konyvtarTable vartable) {
+		super(varframe, "Könyvtár lista", true);
+		konyvtartm=vartable;
 		
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);

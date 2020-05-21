@@ -83,11 +83,11 @@ public class konyvtarModify extends JDialog {
 		JButton btnModify = new JButton("Adatsor m\u00F3dos\u00EDt\u00E1s");
 		btnModify.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int count=0, chk=0, x=0;
+				int count=0, chacked=0, x=0;
 				for(x=0; x<konyvtartm.getRowCount();x++)
 					if((Boolean)konyvtartm.getValueAt(x, 0)) {
 						count++;
-						chk=x;
+						chacked=x;
 					}
 				if(count==0) {
 					checker.SendMessage("Nincs kijelölve módosítandó rekord",0);
@@ -100,23 +100,23 @@ public class konyvtarModify extends JDialog {
 						boolean okay=true;
 						if(checker.filled(textField_isbn, "ISBN")) okay=checker.testInt(textField_isbn, "ISBN");
 						if(okay) {
-							String isbn=konyvtartm.getValueAt(chk, 1).toString();
+							String isbn=konyvtartm.getValueAt(chacked, 1).toString();
 							dbmethods.DBConnect();
-							if(checker.filled(textField_isbn, "ISBN")) dbmethods.UpdateData(isbn, "isbn", checker.RTF(textField_isbn));
-							if(checker.filled(textField_title, "Title")) dbmethods.UpdateData(isbn, "title", checker.RTF(textField_title));
-							if(checker.filled(textField_author, "Author")) dbmethods.UpdateData(isbn, "author", checker.RTF(textField_author));
-							if(checker.filled(textField_releasedate, "Release date")) dbmethods.UpdateData(isbn, "releasedate", checker.RTF(textField_releasedate));
-							if(checker.filled(textField_status, "Status")) dbmethods.UpdateData(isbn, "status", checker.RTF(textField_status));
+							if(checker.filled(textField_isbn, "ISBN")) dbmethods.UpdateData(isbn, "isbn", checker.ReadTextField(textField_isbn));
+							if(checker.filled(textField_title, "Title")) dbmethods.UpdateData(isbn, "title", checker.ReadTextField(textField_title));
+							if(checker.filled(textField_author, "Author")) dbmethods.UpdateData(isbn, "author", checker.ReadTextField(textField_author));
+							if(checker.filled(textField_releasedate, "Release date")) dbmethods.UpdateData(isbn, "releasedate", checker.ReadTextField(textField_releasedate));
+							if(checker.filled(textField_status, "Status")) dbmethods.UpdateData(isbn, "status", checker.ReadTextField(textField_status));
 							dbmethods.DBDisconnect();
 							
 							
-							if(checker.filled(textField_isbn, "ISBN")) konyvtartm.setValueAt(checker.stringToInt(checker.RTF(textField_isbn)), chk, 1);
-							if(checker.filled(textField_title, "Title")) konyvtartm.setValueAt(checker.RTF(textField_title), chk, 2);
-							if(checker.filled(textField_author, "Author")) konyvtartm.setValueAt(checker.RTF(textField_author), chk, 3);
-							if(checker.filled(textField_releasedate, "Release date")) konyvtartm.setValueAt(checker.RTF(textField_releasedate), chk, 4);
-							if(checker.filled(textField_status, "Status")) konyvtartm.setValueAt(checker.RTF(textField_status), chk, 5);
+							if(checker.filled(textField_isbn, "ISBN")) konyvtartm.setValueAt(checker.stringToInt(checker.ReadTextField(textField_isbn)), chacked, 1);
+							if(checker.filled(textField_title, "Title")) konyvtartm.setValueAt(checker.ReadTextField(textField_title), chacked, 2);
+							if(checker.filled(textField_author, "Author")) konyvtartm.setValueAt(checker.ReadTextField(textField_author), chacked, 3);
+							if(checker.filled(textField_releasedate, "Release date")) konyvtartm.setValueAt(checker.ReadTextField(textField_releasedate), chacked, 4);
+							if(checker.filled(textField_status, "Status")) konyvtartm.setValueAt(checker.ReadTextField(textField_status), chacked, 5);
 							checker.SendMessage("A rekord módosítva", 1);
-							resetModifyData(chk);
+							resetModifyData(chacked);
 						}
 					}else {
 						checker.SendMessage("Nincs kitöltve egyetlen módosítandó mezõ sem!", 0);
